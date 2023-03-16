@@ -1,7 +1,7 @@
 kaboom();
 
-loadSprite("mole", "assets/mole.png");
-loadSprite("bg", "assets/bg.jpg");
+loadSprite("mole", "assets/mole.jpg");
+loadSprite("bg", "assets/download.jpeg");
 
 scene("start", () => {
   add([pos(0, 0), color(0, 0, 255), rect(width(), height())]);
