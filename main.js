@@ -5,6 +5,8 @@ kaboom({
   scale: 2.5,
 });
 
+//test
+
 loadRoot("sprites/");
 loadAseprite("mario", "Mario.png", "Mario.json");
 loadAseprite("enemies", "enemies.png", "enemies.json");
