@@ -179,24 +179,55 @@ scene("game", (levelNumber = 0) => {
   ]);
 
   const player = level.spawn("p", 1, 10);
+
+  const SPEED = 120;
+
+  onKeyDown("right", () => {
+    player.flipX(false);
+    player.move(SPEED, 0);
+  });
+  
+  onKeyDown("left", () => {
+    player.flipX(true);
+    if (toScreen(player.pos).x > 20) {
+      player.move(-SPEED, 0);
+    }
+  });
+  
+  onKeyPress("space", () => {
+    if (player.grounded()) {
+      player.jump();
+    }
+  });
+
+  player.onUpdate(() => {
+    // center camera to player
+    var currCam = camPos();
+    if (currCam.x < player.pos.x) {
+      camPos(player.pos.x, currCam.y);
+    }
+  });
+
 });
 
-const SPEED = 120;
-
-onKeyDown("right", () => {
-  player.flipX(false);
-  player.move(SPEED, 0);
-});
-
-onKeyDown("left", () => {
-  player.flipX(true);
-  if (toScreen(player.pos).x > 20) {
-    player.move(-SPEED, 0);
-  }
-});
-
-onKeyPress("space", () => {
-  if (player.grounded()) {
-    player.jump();
-  }
-});
+function patrol(distance = 100, speed = 50, dir = 1) {
+  return {
+    id: "patrol",
+    require: ["pos", "area"],
+    startingPos: vec2(0, 0),
+    add() {
+      this.startingPos = this.pos;
+      this.on("collide", (obj, side) => {
+        if (side === "left" || side === "right") {
+          dir = -dir;
+        }
+      });
+    },
+    update() {
+      if (Math.abs(this.pos.x - this.startingPos.x) >= distance) {
+        dir = -dir;
+      }
+      this.move(speed * dir, 0);
+    },
+  };
+}
