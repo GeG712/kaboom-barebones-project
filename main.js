@@ -1,5 +1,4 @@
 kaboom();
-test
 
 loadSprite("mole", "assets/mole.jpg");
 loadSprite("bg", "assets/download.jpeg");
