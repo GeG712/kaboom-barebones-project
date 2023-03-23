@@ -166,7 +166,7 @@ scene("game", (levelNumber = 0) => {
   add([sprite("hill"), pos(32, 208), layer("bg"), origin("bot")]);
 
   add([sprite("shrubbery"), pos(200, 208), layer("bg"), origin("bot")]);
-
+ 
   add([
     text("Level " + (levelNumber + 1), { size: 24 }),
     pos(vec2(160, 120)),
