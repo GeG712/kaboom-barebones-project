@@ -114,7 +114,7 @@ const levelConf = {
     sprite("bigMushy"),
     area(),
     solid(),
-    //patrol(10000),
+    patrol(10000),
     body(),
     cleanup(),
     origin("bot"),
@@ -127,18 +127,8 @@ const levelConf = {
     area({ width: 16, height: 16 }),
     solid(),
     body(),
-    //patrol(50),
-    let canSquash = false;
-
-    player.onCollide("badGuy", (baddy) => {
-      if (baddy.isAlive == false) return;
-      if (canSquash) {
-        // Mario has jumped on the bad guy:
-        baddy.squash();
-      } else {
-        // Mario has been hurt. Add logic here later...
-      }
-    });
+    patrol(50),
+    enemy(),
     origin("bot"),
     "badGuy",
   ],
@@ -219,6 +209,18 @@ scene("game", (levelNumber = 0) => {
     }
     if (player.grounded()) {
       canSquash = false;
+    }
+  });
+
+  let canSquash = false;
+
+  player.onCollide("badGuy", (baddy) => {
+    if (baddy.isAlive == false) return;
+    if (canSquash) {
+      // Mario has jumped on the bad guy:
+      baddy.squash();
+    } else {
+      // Mario has been hurt. Add logic here later...
     }
   });
 
