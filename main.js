@@ -128,7 +128,17 @@ const levelConf = {
     solid(),
     body(),
     //patrol(50),
-    //enemy(),
+    let canSquash = false;
+
+    player.onCollide("badGuy", (baddy) => {
+      if (baddy.isAlive == false) return;
+      if (canSquash) {
+        // Mario has jumped on the bad guy:
+        baddy.squash();
+      } else {
+        // Mario has been hurt. Add logic here later...
+      }
+    });
     origin("bot"),
     "badGuy",
   ],
@@ -197,6 +207,7 @@ scene("game", (levelNumber = 0) => {
   onKeyPress("space", () => {
     if (player.grounded()) {
       player.jump();
+      canSquash = true;
     }
   });
 
@@ -205,6 +216,9 @@ scene("game", (levelNumber = 0) => {
     var currCam = camPos();
     if (currCam.x < player.pos.x) {
       camPos(player.pos.x, currCam.y);
+    }
+    if (player.grounded()) {
+      canSquash = false;
     }
   });
 
@@ -228,6 +242,24 @@ function patrol(distance = 100, speed = 50, dir = 1) {
         dir = -dir;
       }
       this.move(speed * dir, 0);
+    },
+  };
+}
+
+function enemy() {
+  return {
+    id: "enemy",
+    require: ["pos", "area", "sprite", "patrol"],
+    isAlive: true,
+    update() {},
+    squash() {
+      this.isAlive = false;
+      this.unuse("patrol");
+      this.stop();
+      this.frame = 2;
+      this.area.width = 16;
+      this.area.height = 8;
+      this.use(lifespan(0.5, { fade: 0.1 }));
     },
   };
 }
