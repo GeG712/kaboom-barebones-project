@@ -96,7 +96,7 @@ const levelConf = {
     sprite("emptyBox"),
     area(),
     solid(),
-    // bump(),
+    bump(),
     origin("bot"),
     "emptyBox",
   ],
@@ -104,7 +104,7 @@ const levelConf = {
     sprite("coin"),
     area(),
     solid(),
-    //bump(64, 8),
+    bump(64, 8),
     cleanup(),
     lifespan(0.4, { fade: 0.01 }),
     origin("bot"),
@@ -137,7 +137,7 @@ const levelConf = {
     area({ width: 16, height: 16 }),
     body(),
     //mario(),
-    //bump(150, 20, false),
+    bump(150, 20, false),
     origin("bot"),
     "player",
   ],
@@ -224,6 +224,21 @@ scene("game", (levelNumber = 0) => {
     }
   });
 
+  player.on("headbutt", (obj) => {
+    if (obj.is("questionBox")) {
+      if (obj.is("coinBox")) {
+        let coin = level.spawn("c", obj.gridPos.sub(0, 1));
+        coin.bump();
+      } else if (obj.is("mushyBox")) {
+        level.spawn("M", obj.gridPos.sub(0, 1));
+      }
+      var pos = obj.gridPos;
+      destroy(obj);
+      var box = level.spawn("!", pos);
+      box.bump();
+    }
+  });
+
 });
 
 function patrol(distance = 100, speed = 50, dir = 1) {
@@ -262,6 +277,35 @@ function enemy() {
       this.area.width = 16;
       this.area.height = 8;
       this.use(lifespan(0.5, { fade: 0.1 }));
+    },
+  };
+}
+
+function bump(offset = 8, speed = 2, stopAtOrigin = true) {
+  return {
+    id: "bump",
+    require: ["pos"],
+    bumpOffset: offset,
+    speed: speed,
+    bumped: false,
+    origPos: 0,
+    direction: -1,
+    update() {
+      if (this.bumped) {
+        this.pos.y = this.pos.y + this.direction * this.speed;
+        if (this.pos.y < this.origPos - this.bumpOffset) {
+          this.direction = 1;
+        }
+        if (stopAtOrigin && this.pos.y >= this.origPos) {
+          this.bumped = false;
+          this.pos.y = this.origPos;
+          this.direction = -1;
+        }
+      }
+    },
+    bump() {
+      this.bumped = true;
+      this.origPos = this.pos.y;
     },
   };
 }
