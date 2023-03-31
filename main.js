@@ -9,7 +9,7 @@ loadRoot("sprites/");
 loadAseprite("mario", "Mario.png", "Mario.json");
 loadAseprite("enemies", "enemies.png", "enemies.json");
 loadSprite("ground", "stone.jpg");
-loadSprite("questionBox", "questionBox.png");
+loadSprite("questionBox", "luckyblock.png");
 loadSprite("emptyBox", "emptyBox.png");
 loadSprite("brick", "brick.png");
 loadSprite("coin", "Bitcoin.png");
