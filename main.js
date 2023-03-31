@@ -1,4 +1,4 @@
-kaboom({
+ kaboom({
   background: [134, 135, 247],
   width: 512,
   height: 240,
