@@ -8,7 +8,7 @@
 loadRoot("sprites/");
 loadAseprite("mario", "Mario.png", "Mario.json");
 loadAseprite("enemies", "enemies.png", "enemies.json");
-loadSprite("ground", "ground.png");
+loadSprite("ground", "stone.jpg");
 loadSprite("questionBox", "questionBox.png");
 loadSprite("emptyBox", "emptyBox.png");
 loadSprite("brick", "brick.png");
