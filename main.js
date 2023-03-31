@@ -143,11 +143,37 @@ const levelConf = {
  
 scene("credits", () => {
   add([
-    text("Aryan, Fabian, Gianluca,", { size: 24 }),
+    text("Creators:", { size: 24 }),
     pos(vec2(256, 48)),
     origin("center"),
     color(255, 255, 255),
   ]);
+
+  add([
+    text("Aryan, Fabian, Gianluca, Sven", { size: 24 }),
+    pos(vec2(256, 96)),
+    origin("center"),
+    color(255,100,50),
+  ]);
+
+  add([
+    text("Press backspace to", { size: 24 }),
+    pos(vec2(256, 144)),
+    origin("center"),
+    color(100,100,255),
+  ]);
+
+  add([
+    text("return to the start menu", { size: 24 }),
+    pos(vec2(256, 192)),
+    origin("center"),
+    color(100,100,255),
+  ]);
+
+  onKeyRelease("backspace", () => {
+    go("start");
+  });
+
 });
 
 
@@ -166,13 +192,14 @@ scene("start", () => {
     color(255, 255, 255),
   ]);
 
+  onKeyRelease("c", () => {
+    go("credits");
+  });
+
   onKeyRelease("enter", () => {
     go("game");
   });
 
-  onKeyRelease("KeyC", () => {
-    go("credits");
-  });
 });
 
 go("start");
