@@ -12,7 +12,7 @@ loadSprite("ground", "stone.jpg");
 loadSprite("questionBox", "questionBox.png");
 loadSprite("emptyBox", "emptyBox.png");
 loadSprite("brick", "brick.png");
-loadSprite("coin", "coin.png");
+loadSprite("coin", "Bitcoin.png");
 loadSprite("bigMushy", "bigMushy.png");
 loadSprite("pipeTop", "pipeTop.png");
 loadSprite("pipeBottom", "pipeBottom.png");
