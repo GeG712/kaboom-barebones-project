@@ -90,7 +90,7 @@ const LEVELS = [
     "                                                                                                                                                ",
     "                                                                                           _                                                    ",
     "                                                                                           |                                                    ",
-    "                                                                     ---          --     -------                                                ",
+    "                                                                     ---           --    -------                                                ",
     "      -?-b-                                                                  ----                                                               ",
     "                                                          ------                                                                                ",
     "                                                                                                                                                ", 
@@ -220,22 +220,36 @@ scene("credits", () => {
   ]);
 
   add([
-    text("Aryan, Fabian, Gianluca, Sven", { size: 24 }),
+
+    text("Aryan, Fabian, Gianluca, Sven" , { size: 24 }),
+   
     pos(vec2(256, 96)),
     origin("center"),
     color(255,100,50),
+
   ]);
 
   add([
+
+    text("use arrow keys to move and space to Jump" , { size: 16 }),
+   
+    pos(vec2(256, 126)),
+    origin("center"),
+    color(255,100,50),
+
+  ]);
+
+
+  add([
     text("Press backspace to", { size: 24 }),
-    pos(vec2(256, 144)),
+    pos(vec2(256, 154)),
     origin("center"),
     color(100,100,255),
   ]);
 
   add([
     text("return to the start menu", { size: 24 }),
-    pos(vec2(256, 192)),
+    pos(vec2(256, 202)),
     origin("center"),
     color(100,100,255),
   ]);
@@ -256,7 +270,7 @@ scene("start", () => {
   ]);
 
   add([
-    text("Press C to see contributors", { size: 24 }),
+    text("Press C to see contributors and Controls", { size: 16 }),
     pos(vec2(256, 192)),
     origin("center"),
     color(255, 255, 255),
@@ -289,10 +303,6 @@ scene("game", (levelNumber = 0) => {
   add([sprite("shrubbery"), pos(820, 208), layer("bg"), origin("bot")]);
   add([sprite("shrubbery"), pos(960, 208), layer("bg"), origin("bot")]);
   add([sprite("shrubbery"), pos(1230, 208), layer("bg"), origin("bot")]);
-
-
-
-
 
   add([sprite("cloud"), pos(500, 40), layer("bg")]);
   add([sprite("cloud"), pos(700, 45), layer("bg")]);  
@@ -410,7 +420,7 @@ scene("game", (levelNumber = 0) => {
       layer("ui"),
     ]);
     wait(2, () => {
-      go("start");
+   go("start");
     });
   }
 
